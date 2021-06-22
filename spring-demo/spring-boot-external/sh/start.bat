@@ -1,0 +1,1 @@
+java -jar -Dloader.path="lib/" -DNAME=kk  spring-boot-external-1.0.0.jar

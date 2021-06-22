@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qbk.sql.mybatisplus.mapper.TabUserMapper">
+  <resultMap id="BaseResultMap" type="com.qbk.sql.mybatisplus.domain.TabUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    user_id, user_name
+  </sql>
+  <insert id="testAdd">
+      insert into tab_user(user_id, user_name)
+      values (#{userId},#{userName})
+  </insert>
+
+  <!--测试 insert ignore 返回行数-->
+  <insert id="testIgnore">
+    insert ignore tab_user(user_name)
+    values (#{userName})
+  </insert>
+</mapper>

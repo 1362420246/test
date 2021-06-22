@@ -1,0 +1,5 @@
+server:
+  port: 2115
+spring:
+  application:
+    name: spring-event

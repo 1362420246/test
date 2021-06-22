@@ -1,0 +1,17 @@
+server:
+  port: 2110
+spring:
+  application:
+    name: sql-transaction
+  datasource:
+    #allowMultiQueries=true     1、可以在sql语句后携带分号，实现多语句执行  2、可以执行批处理，同时发出多个SQL语句
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+  type-aliases-package: com.qbk.sql.transaction.domain
+logging:
+  level:
+    com.qbk.sql.transaction: debug

@@ -1,0 +1,22 @@
+info:
+  user:
+    name: kk
+    age: 29
+    login_name: qbk #宽松的绑定属性规则,下划线、中划线、大写都可以识别
+    role:
+      role_names: #复杂属性 list
+        - admin
+        - user
+        - programmer
+      role_map: #复杂属性 map
+        - name: kaka
+        - age: 18
+    authentication:
+      - name: quboka
+        password : 123456
+      - name: sssss
+        password : 2222
+      - name: qqqq
+        password: 3333
+server:
+  port: 8019

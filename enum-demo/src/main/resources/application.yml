@@ -1,0 +1,4 @@
+spring:
+  jackson:
+    serialization:
+      WRITE_ENUMS_USING_TO_STRING: true #枚举直接根据toString方法的返回值序列化

@@ -1,0 +1,5 @@
+hbase:
+  config:
+    #指定zk的地址，多个用“,”分割
+    hbase.zookeeper.quorum: hbase01:2181,hbase02:2181,hbase03:2181
+    hbase.zookeeper.znode: /hbase

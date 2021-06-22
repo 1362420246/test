@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.qbk</groupId>
+        <artifactId>test</artifactId>
+        <version>1.0.0</version>
+        <!-- lookup parent from repository -->
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>docker-plugin</artifactId>
+    <version>1.0.0</version>
+    <name>docker-plugin</name>
+    <description>docker插件 + dockerfile</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!--docker-maven-plugin 插件-->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <!--绑定Docker 命令到 Maven 各个阶段-->
+                <!--解释：我们可以把 Docker 分为 build、tag、push，然后分别绑定 Maven 的 package、deploy 阶段-->
+                <executions>
+                    <execution>
+                        <id>build-image</id>
+                        <!--这里将插件绑定在package这个操作上。也就是说，用户只需执行mvn package ，就会自动执行mvn docker:build-->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                            <!--<goal>push</goal> -->
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!--要生成的镜像名和版本-->
+                    <imageName>${project.name}:${project.version}</imageName>
+                    <!--指定Dockerfile路径-->
+                    <dockerDirectory>${project.basedir}/src/main/resources/docker</dockerDirectory>
+                    <!--docker 安装的宿机地址，并且要在docker配置中开放远程端口2375-->
+                    <dockerHost>https://39.106.33.10:2375</dockerHost>
+                    <!--如果docker开户远程了tls认证，侧需要把相关的客户的key(ca.pem cert.pem key.pem三个文件)给放到本地，然后指定路径-->
+                    <dockerCertPath>F:\docker\cert</dockerCertPath>
+                    <resources>
+                        <!-- 这里是复制 jar 包到 docker 容器指定目录配置，也可以写到 Docokerfile 中 -->
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

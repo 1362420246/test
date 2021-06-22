@@ -1,0 +1,47 @@
+server:
+  port: 8066
+#  servlet:
+#    context-path: /date-source
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      master:
+        url: jdbc:mysql://localhost:3306/db01?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: root
+        name: master
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        maxWait: 3000
+        initialSize: 20
+        minIdle: 20
+        maxActive: 500
+      slave-1:
+        url: jdbc:mysql://localhost:3306/db02?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: root
+        name: slave-1
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        maxWait: 3000
+        initialSize: 20
+        minIdle: 20
+        maxActive: 500
+      slave-2:
+        url: jdbc:mysql://localhost:3306/db03?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+        username: root
+        password: root
+        name: slave-2
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        maxWait: 3000
+        initialSize: 20
+        minIdle: 20
+        maxActive: 500
+
+mybatis:
+  type-aliases-package: com.qbk.source.domain
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.qbk.source: debug

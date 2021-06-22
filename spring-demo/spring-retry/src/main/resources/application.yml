@@ -1,0 +1,5 @@
+server:
+  port: 2117
+spring:
+  application:
+    name: spring-retry

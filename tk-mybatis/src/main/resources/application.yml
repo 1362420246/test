@@ -1,0 +1,16 @@
+server:
+  port: 8022
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/item?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+mybatis:
+  type-aliases-package: com.qbk.tkmybatis.domain #实体类的存放路径
+  mapper-locations: classpath:mapper/*.xml
+
+logging:
+  level:
+    com.qbk.tkmybatis: debug

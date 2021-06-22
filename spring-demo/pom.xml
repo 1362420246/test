@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.qbk</groupId>
+		<artifactId>test</artifactId>
+		<version>1.0.0</version>
+		<!-- lookup parent from repository -->
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<packaging>pom</packaging>
+
+	<artifactId>spring-demo</artifactId>
+	<version>1.0.0</version>
+	<name>spring-demo</name>
+	<description>spring-demo</description>
+
+	<modules>
+		<module>spring-boot-external</module>
+		<module>spring-event</module>
+		<module>spring-listener</module>
+		<module>spring-retry</module>
+		<module>springboot-serialize</module>
+		<module>springboot-postprocessor</module>
+		<module>springboot-retrofit</module>
+	</modules>
+
+</project>

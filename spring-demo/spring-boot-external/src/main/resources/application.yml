@@ -1,0 +1,8 @@
+server:
+  port: 2116
+spring:
+  application:
+    name: spring-external
+
+info: # --NAME=曲博卡
+  name: ${NAME:默认值}

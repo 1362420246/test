@@ -1,0 +1,6 @@
+server:
+  port: 8866
+#spring:
+#  profiles:
+#    #测试使用 引入的 starter 项目中的配置文件
+#    active: dev

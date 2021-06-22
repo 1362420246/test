@@ -1,0 +1,30 @@
+{
+    "code": 200,
+    "reason": "operation success",
+    "userlist": [
+        {
+            "uid": 1001004,
+            "name": "qbk",
+            "currentChannelId": "-1",
+            "nick": "qbk"
+        },
+        {
+            "uid": 1001005,
+            "name": "qbk1",
+            "currentChannelId": "-1",
+            "nick": "qbk1"
+        },
+        {
+            "uid": 1001006,
+            "name": "qqqqq",
+            "currentChannelId": "-1",
+            "nick": "qqqqq"
+        },
+        {
+            "uid": 1001007,
+            "name": "aaaa",
+            "currentChannelId": "-1",
+            "nick": "aaaa"
+        }
+    ]
+}

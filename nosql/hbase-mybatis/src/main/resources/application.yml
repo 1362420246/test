@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: hbase-mybatis
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    username:
+    password:
+    driver-class-name: org.apache.phoenix.queryserver.client.Driver
+    url:  jdbc:phoenix:thin:url=http://192.168.10.121:8765;serialization=PROTOBUF
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.qbk.nosql.hbasemybatis.bean
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    lazy-loading-enabled: true
+    multiple-result-sets-enabled: true
+    use-generated-keys: true
+    default-statement-timeout: 60
+    default-fetch-size: 100
