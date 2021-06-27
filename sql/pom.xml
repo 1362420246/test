@@ -22,6 +22,7 @@
 		<module>transaction</module>
 		<module>mybatis-plus</module>
 		<module>mybatis-demo</module>
+		<module>spring-data-jpa-demo</module>
 	</modules>
 
 </project>
