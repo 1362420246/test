@@ -23,6 +23,8 @@ public class KafkaProducer {
         kafkaTemplate.send("topic1", normalMessage);
     }
 
+    /***********************************************/
+
     /**
      * 带回调的生产者
      *
@@ -59,6 +61,9 @@ public class KafkaProducer {
                     }
                 });
     }
+
+    /***********************************************/
+
     /**
      * kafka事务提交
      * 如果在发送消息时需要创建事务，可以使用 KafkaTemplate 的 executeInTransaction 方法来声明事务，

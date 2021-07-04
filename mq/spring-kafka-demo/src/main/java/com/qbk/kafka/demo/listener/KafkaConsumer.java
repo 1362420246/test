@@ -6,6 +6,7 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.PartitionOffset;
 import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.listener.ConsumerAwareListenerErrorHandler;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -21,6 +22,8 @@ public class KafkaConsumer {
         // 消费的哪个topic、partition的消息,打印出消息内容
         System.out.println("简单消费：topic:" + record.topic() + "|partition:" + record.partition() + "|offset:" + record.offset() + "|value:" + record.value());
     }
+
+    /***********************************************/
 
     /**
      * 指定topic、partition、offset消费
@@ -48,6 +51,7 @@ public class KafkaConsumer {
         System.out.println("复杂消费topic:" + record.topic() + "|partition:" + record.partition() + "|offset:" + record.offset() + "|value:" + record.value());
     }
 
+    /***********************************************/
     /**
      * 批量消费
      *
@@ -64,6 +68,7 @@ public class KafkaConsumer {
         }
     }
 
+    /***********************************************/
     /**
      * 新建一个异常处理器，用@Bean注入
      */
@@ -87,4 +92,17 @@ public class KafkaConsumer {
         throw new Exception("简单消费-模拟异常");
     }
 
+    /***********************************************/
+
+    /**
+     * 消息转发
+     *
+     *从topic1接收到的消息经过处理后转发到topic2
+     */
+    @KafkaListener(topics = {"topic2"})
+    @SendTo("topic1")
+    public String onMessage7(ConsumerRecord<?, ?> record) {
+        System.out.println("消息转发前:" + record.value());
+        return record.value()+"-forward message";
+    }
 }

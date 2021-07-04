@@ -16,6 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 3.批量消费
  * 4.消费异常处理器
  * 5.消息过滤器
+ * 6.消息转发
  */
 @SpringBootApplication
 public class KafkaDemoApplication {
