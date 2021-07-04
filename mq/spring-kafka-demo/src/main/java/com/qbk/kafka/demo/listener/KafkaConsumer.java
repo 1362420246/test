@@ -1,9 +1,11 @@
 package com.qbk.kafka.demo.listener;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.springframework.context.annotation.Bean;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.annotation.PartitionOffset;
 import org.springframework.kafka.annotation.TopicPartition;
+import org.springframework.kafka.listener.ConsumerAwareListenerErrorHandler;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -39,11 +41,11 @@ public class KafkaConsumer {
                     @TopicPartition(
                             topic = "topic1",
                             //partitions = "0",
-                            partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "3")
+                            partitionOffsets = @PartitionOffset(partition = "0", initialOffset = "28")
                     )
             })
     public void onMessage2(ConsumerRecord<?, ?> record) {
-        System.out.println("topic:" + record.topic() + "|partition:" + record.partition() + "|offset:" + record.offset() + "|value:" + record.value());
+        System.out.println("复杂消费topic:" + record.topic() + "|partition:" + record.partition() + "|offset:" + record.offset() + "|value:" + record.value());
     }
 
     /**
@@ -54,11 +56,35 @@ public class KafkaConsumer {
      *  # 批量消费每次最多消费多少条消息
      *  spring.kafka.consumer.max-poll-records=50
      */
-   // @KafkaListener(id = "consumer2",groupId = "qbk-group", topics = "topic1")
+    //@KafkaListener(id = "consumer2",groupId = "qbk-group2", topics = "topic1")
     public void onMessage3(List<ConsumerRecord<?, ?>> records) {
         System.out.println(">>>批量消费一次，records.size()=" + records.size());
         for (ConsumerRecord<?, ?> record : records) {
             System.out.println(record.value());
         }
     }
+
+    /**
+     * 新建一个异常处理器，用@Bean注入
+     */
+    @Bean
+    public ConsumerAwareListenerErrorHandler consumerAwareErrorHandler() {
+        return (message, exception, consumer)->{
+            System.out.println("消费异常："+message.getPayload());
+            return null;
+        };
+    }
+    /**
+     * 将这个异常处理器的BeanName放到@KafkaListener注解的errorHandler属性里面
+     */
+    @KafkaListener(
+            id = "consumer3",
+            groupId = "qbk-group3",
+            topics = {"topic2"},
+            errorHandler = "consumerAwareErrorHandler")
+    public void onMessage4(ConsumerRecord<?, ?> record) throws Exception {
+        System.out.println("异常消费topic:" + record.topic() + "|partition:" + record.partition() + "|offset:" + record.offset() + "|value:" + record.value());
+        throw new Exception("简单消费-模拟异常");
+    }
+
 }

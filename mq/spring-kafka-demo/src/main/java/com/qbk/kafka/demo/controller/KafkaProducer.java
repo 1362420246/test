@@ -45,7 +45,7 @@ public class KafkaProducer {
     }
     @GetMapping("/kafka/callbackTwo/{message}")
     public void sendMessage3(@PathVariable("message") String callbackMessage) {
-        kafkaTemplate.send("topic1", callbackMessage)
+        kafkaTemplate.send("topic2", callbackMessage)
                 .addCallback(new ListenableFutureCallback<SendResult<String, Object>>() {
                     @Override
                     public void onFailure(Throwable ex) {
@@ -67,7 +67,7 @@ public class KafkaProducer {
      * spring.kafka.producer.retries=1
      * spring.kafka.producer.acks=-1
      */
-    @GetMapping("/kafka/transaction/{message}")
+    //@GetMapping("/kafka/transaction/{message}")
     public void sendMessage7(@PathVariable("message") String message) {
         // 声明事务：后面报错消息不会发出去
         kafkaTemplate.executeInTransaction(

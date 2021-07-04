@@ -3,6 +3,16 @@ package com.qbk.kafka.demo;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * 1.简单发送消息
+ * 2.带回调的发送消息
+ * 3.发送事务消息
+ * 4.自定义分区器
+ *
+ * 1.简单消费
+ * 2.指定topic、partition、offset消费
+ * 3.批量消费
+ */
 @SpringBootApplication
 public class KafkaDemoApplication {
     public static void main(String[] args) {
