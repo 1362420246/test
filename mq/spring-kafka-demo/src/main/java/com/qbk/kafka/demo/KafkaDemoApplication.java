@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 2.带回调的发送消息
  * 3.发送事务消息
  * 4.自定义分区器
+ * 5.拦截器
  *
  * 消费者:
  * 1.简单消费
