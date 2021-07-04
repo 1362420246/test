@@ -36,11 +36,12 @@ public class KafkaConsumer2 {
         // 消息过滤策略
         factory.setRecordFilterStrategy(
                 consumerRecord -> {
-                    if (Integer.parseInt(consumerRecord.value().toString()) % 2 == 0) {
-                        return false;
-                    }
-                    //返回true消息则被过滤
-                    return true;
+                    return false;
+//                    if (Integer.parseInt(consumerRecord.value().toString()) % 2 == 0) {
+//                        return false;
+//                    }
+//                    //返回true消息则被过滤
+//                    return true;
                 });
         return factory;
     }

@@ -18,6 +18,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * 4.消费异常处理器
  * 5.消息过滤器
  * 6.消息转发
+ *
+ * 1.Kafka Streams
  */
 @SpringBootApplication
 public class KafkaDemoApplication {

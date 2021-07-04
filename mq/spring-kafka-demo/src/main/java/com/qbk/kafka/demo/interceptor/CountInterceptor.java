@@ -23,7 +23,7 @@ public class CountInterceptor implements ProducerInterceptor<String, String> {
      */
     @Override
     public ProducerRecord<String, String> onSend(ProducerRecord<String, String> record) {
-        return record;
+        return new ProducerRecord<>(record.topic(), record.key(), record.value());
     }
 
     /**
