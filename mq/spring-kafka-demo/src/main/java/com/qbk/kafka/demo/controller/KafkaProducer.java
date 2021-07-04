@@ -43,7 +43,6 @@ public class KafkaProducer {
                     System.out.println("发送消息失败:" + failure.getMessage());
                 });
     }
-
     @GetMapping("/kafka/callbackTwo/{message}")
     public void sendMessage3(@PathVariable("message") String callbackMessage) {
         kafkaTemplate.send("topic1", callbackMessage)
@@ -59,5 +58,28 @@ public class KafkaProducer {
                                 + result.getRecordMetadata().partition() + "-" + result.getRecordMetadata().offset());
                     }
                 });
+    }
+    /**
+     * kafka事务提交
+     * 如果在发送消息时需要创建事务，可以使用 KafkaTemplate 的 executeInTransaction 方法来声明事务，
+     *
+     * spring.kafka.producer.transaction-id-prefix=topic
+     * spring.kafka.producer.retries=1
+     * spring.kafka.producer.acks=-1
+     */
+    @GetMapping("/kafka/transaction/{message}")
+    public void sendMessage7(@PathVariable("message") String message) {
+        // 声明事务：后面报错消息不会发出去
+        kafkaTemplate.executeInTransaction(
+            operations -> {
+                operations.send("topic2","125",message);
+//                throw new RuntimeException("fail");
+                return true;
+            }
+        );
+        // 不声明事务：后面报错但前面消息已经发送成功了
+//        kafkaTemplate.send("topic1", "test executeInTransaction");
+//        throw new RuntimeException("fail");
+
     }
 }
