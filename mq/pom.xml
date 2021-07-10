@@ -22,6 +22,7 @@
 		<module>spring-boot-amqp-delayed</module>
 		<module>spring-boot-amqp-delayed-plugin</module>
 		<module>spring-kafka-demo</module>
+		<module>spring-rocketmq-demo</module>
 	</modules>
 
 </project>
