@@ -74,17 +74,14 @@ public class KafkaProducer {
      */
     //@GetMapping("/kafka/transaction/{message}")
     public void sendMessage7(@PathVariable("message") String message) {
-        // 声明事务：后面报错消息不会发出去
+        //Kafka生产者在同一个事务内提交到多个分区的消息，要么同时成功，要么同时失败。
         kafkaTemplate.executeInTransaction(
-            operations -> {
-                operations.send("topic2","125",message);
-//                throw new RuntimeException("fail");
-                return true;
-            }
+                operations -> {
+                    operations.send("topic1","125",message);
+                    int i = 10/0;
+                    operations.send("topic2","456",message);
+                    return true;
+                }
         );
-        // 不声明事务：后面报错但前面消息已经发送成功了
-//        kafkaTemplate.send("topic1", "test executeInTransaction");
-//        throw new RuntimeException("fail");
-
     }
 }
