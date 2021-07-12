@@ -27,12 +27,16 @@ public class TXMsgListener implements RocketMQLocalTransactionListener {
     @Override
     public RocketMQLocalTransactionState executeLocalTransaction(Message msg, Object arg) {
         log.info(">>>> TX message listener execute local transaction, message={},args={} <<<<",msg,arg);
-        // 执行本地事务
-        RocketMQLocalTransactionState result = RocketMQLocalTransactionState.COMMIT;
+
+        //返回的 事务消息 状态
+        RocketMQLocalTransactionState result;
         try {
+            // 执行本地事务
             String message = new String((byte[]) msg.getPayload(), StandardCharsets.UTF_8);
             System.out.println("执行本地事务:" + message);
             //int a = 10 /0;
+
+            result = RocketMQLocalTransactionState.COMMIT;
         } catch (Exception e) {
             log.error(">>>> exception message={} <<<<",e.getMessage());
             result = RocketMQLocalTransactionState.UNKNOWN;
@@ -46,12 +50,17 @@ public class TXMsgListener implements RocketMQLocalTransactionListener {
     @Override
     public RocketMQLocalTransactionState checkLocalTransaction(Message msg) {
         log.info(">>>> TX message listener check local transaction, message={} <<<<",msg.getPayload());
-        // 检查本地事务
-        RocketMQLocalTransactionState result = RocketMQLocalTransactionState.COMMIT;
+
+        //返回的 事务消息 状态
+        //此时如果返回 Unknown 状态。将重试15次确认是否 提交 还是 回滚，15次以后还是Unknown则抛弃消息。
+        RocketMQLocalTransactionState result = RocketMQLocalTransactionState.UNKNOWN;
         try {
+            // 检查本地事务状态
             String message = new String((byte[]) msg.getPayload(), StandardCharsets.UTF_8);
             System.out.println("检查本地事务:" + message);
             //int b = 10 /0;
+
+            result = RocketMQLocalTransactionState.COMMIT;
         } catch (Exception e) {
             // 异常就回滚
             log.error(">>>> exception message={} <<<<",e.getMessage());
