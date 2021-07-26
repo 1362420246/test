@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
+ * 布隆过滤器
+ * 自定义redis客户端
  * jedis 发布订阅
  */
 @SpringBootApplication
