@@ -58,6 +58,13 @@
             <artifactId>guava</artifactId>
         </dependency>
 
+        <!--redisson 包含spring-boot-starter-data-redis -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.16.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
