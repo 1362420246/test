@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * lua脚本
  * 自定义redis客户端
  * jedis 发布订阅
+ * Reactor模型
  */
 @SpringBootApplication
 public class RedisApplication {
