@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * 布隆过滤器
+ * jedis 分片
  * Redisson 分布式锁
  * lua脚本
  * 自定义redis客户端
