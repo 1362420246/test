@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Redisson 分布式锁
  * lua脚本
  * 自定义redis客户端
+ * pipeline
  * jedis 发布订阅
  * Reactor模型
  */
