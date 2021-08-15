@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+    <property resource="logback.properties"/>
+
+    <!-- 彩色日志 -->
+    <!-- 彩色日志依赖的渲染类 -->
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+    <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter" />
+    <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
+
+    <!-- 彩色日志格式 -->
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+    <!--控制台输出-->
+    <appender name="CONSOLE-LOG" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!--INFO/DEBUG日志-->
+    <!--获取比root配置的级别高(包括配置级别)但除error级别的日志-->
+    <appender name="INFO-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--LevelFilter是级别过滤器，根据日志级别进行过滤。
+        如果日志级别等于配置级别，过滤器会根据onMath 和 onMismatch接收或拒绝日志。-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <!--设置过滤级别-->
+            <level>ERROR</level>
+            <!--用于配置符合过滤条件的操作-->
+            <onMatch>DENY</onMatch>
+            <!--用于配置不符合过滤条件的操作-->
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+        <!--滚动策略-->
+        <!-- SizeAndTimeBasedRollingPolicy 可以按照大小切割日志  日志文件中的%d、%i是不可缺少的-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${LOG_INFO_HOME}//%d{yyyy-MM-dd_HH}.%i.log</fileNamePattern>
+            <!--日志文件大小-->
+            <maxFileSize>${LOG_MAX_FILE_SIZE}</maxFileSize>
+            <!--日志文件保留天数-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--ERROR日志-->
+    <appender name="ERROR-LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--ThresholdFilter是临界值过滤器，过滤掉低于指定临界值的日志。
+        当日志级别等于或高于临界值时，过滤器返回NEUTRAL；
+        当日志级别低于临界值时，日志会被拒绝-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd' 'HH:mm:ss.sss}] [%C] [%t] [%L] [%-5p] %m%n</pattern>
+        </encoder>
+
+        <!--滚动策略 次策略无法按照大小切割日志 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>${LOG_ERROR_HOME}//%d{yyyy-MM-dd_HH}.log</fileNamePattern>
+            <!--日志文件保留天数-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!--日志输出级别 -->
+    <root level= "${LOG_LEVEL}">
+        <appender-ref ref="CONSOLE-LOG" />
+        <appender-ref ref="INFO-LOG" />
+        <appender-ref ref="ERROR-LOG" />
+    </root>
+
+    <!-- !!!!!!!!!!!!!!!!业务分割线!!!!!!!!!!!!!!!! -->
+    <!--自定义app 日志输出-->
+    <appender name="appAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log//app//app-%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%m%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!--logger元素定义一个日志输出器，指定logger的设置。常见的有两种:Root和Logger-->
+    <!--某个logger的additivity设置为false，表示log只打印到本log的appender中，而不再打印到其父logger的appender-->
+    <logger name="app" additivity="false" level="INFO" >
+        <appender-ref ref="appAppender" />
+    </logger>
+
+    <!--自定义app2 日志输出-->
+    <appender name="appAppender2" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- File 和 fileNamePattern 区别 -->
+        <!--如果设置了FileAppender包含的属性file，系统实时生成的日志和根据日期生成的日志可以存储在不同的目录文件下。
+        在这种情况下，系统实时生成的日志内容都会记录在file属性指定的文件中。因此，该日志文件名称不会随着时间的移动而更改。-->
+        <!--如果忽略了FileAppender包含的属性file，活动文件的名字会根据fileNamePattern的值-->
+        <File>log//app//app2.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>log//app//app2-%d{yyyy-MM-dd_HH-mm}.log</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="app2" additivity="false" level="INFO" >
+        <appender-ref ref="appAppender2" />
+    </logger>
+</configuration>

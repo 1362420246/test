@@ -26,6 +26,7 @@
 		<module>springboot-serialize</module>
 		<module>springboot-postprocessor</module>
 		<module>springboot-retrofit</module>
+		<module>springboot-log</module>
 	</modules>
 
 </project>
