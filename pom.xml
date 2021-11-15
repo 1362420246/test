@@ -65,6 +65,7 @@
 		<module>monitor</module>
 <!--		<module>javademo</module>-->
 		<module>nosql</module>
+		<module>model</module>
 	</modules>
 
 	<properties>
