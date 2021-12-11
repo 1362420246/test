@@ -1,0 +1,3 @@
+#logging:
+#  # 设置log4j.properties位置
+#  config: classpath:log4j.xml

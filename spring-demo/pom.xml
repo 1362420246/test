@@ -27,6 +27,7 @@
 		<module>springboot-postprocessor</module>
 		<module>springboot-retrofit</module>
 		<module>springboot-log</module>
+		<module>springboot-log4j</module>
 		<module>springboot-init</module>
 	</modules>
 
