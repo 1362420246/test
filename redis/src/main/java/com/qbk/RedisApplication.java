@@ -15,6 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * jedis 发布订阅
  * Reactor模型
  * zset实战
+ * RedisTemplate
  */
 @SpringBootApplication
 public class RedisApplication {
