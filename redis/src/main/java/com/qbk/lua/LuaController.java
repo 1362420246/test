@@ -29,16 +29,22 @@ public class LuaController {
             "end \n" +
             "return 1";
 
+    /**
+     *  限流
+     */
     @GetMapping("/lua/{id}")
     public String lua(@PathVariable("id")Integer id) throws ExecutionException, InterruptedException {
+        //脚本操作对象
         RScript rScript = redissonClient.getScript();
         List<Object> keys = Collections.singletonList("LIMIT:" + id);
         RFuture<Object> future =
+                //Lua脚本执行
                 rScript.evalAsync(
-                        RScript.Mode.READ_WRITE,
-                        LIMIT_LUA,
-                        RScript.ReturnType.INTEGER,
-                        keys,10,3);
+                        RScript.Mode.READ_WRITE, //脚本模式：读写
+                        LIMIT_LUA,//lua脚本
+                        RScript.ReturnType.INTEGER,// 返回值类型
+                        keys,//key
+                        10,3);//参数
         return future.get().toString();
     }
 }
