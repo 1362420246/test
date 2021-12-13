@@ -236,6 +236,16 @@ public class RedisTemplateController {
         return "zset";
     }
 
+    @GetMapping("/pipeline")
+    public String pipeline(){
+        Map<String,String> map = new HashMap<>();
+        map.put("a","a");
+        map.put("b","b");
+        map.put("c","c");
+        executePipelined(map,30);
+        return "pipeline";
+    }
+
     /**
      * 功能描述: 使用pipelined批量存储
      *
