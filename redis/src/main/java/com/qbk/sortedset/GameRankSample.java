@@ -7,7 +7,7 @@ import java.util.UUID;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Tuple;
 /**
- * zset 示例
+ * zset 示例 1
  * 游戏玩家积分排行榜
  */
 public class GameRankSample {
