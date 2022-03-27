@@ -32,14 +32,14 @@
 		<dependency>
 			<groupId>org.openjdk.jol</groupId>
 			<artifactId>jol-core</artifactId>
-			<version>0.10</version>
+			<version>0.16</version>
 		</dependency>
 
 		<!-- ThreadLocal值的传递-->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>transmittable-thread-local</artifactId>
-			<version>2.12.1</version>
+			<version>2.12.4</version>
 		</dependency>
 
 	</dependencies>
