@@ -19,6 +19,7 @@
 	<description>sql</description>
 
 	<modules>
+		<module>jdbctemplate-demo</module>
 		<module>transaction</module>
 		<module>mybatis-plus</module>
 		<module>mybatis-demo</module>
