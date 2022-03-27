@@ -3,8 +3,7 @@ package com.qbk.jpa.demo;
 import com.qbk.jpa.demo.dao.UserRepository;
 import com.qbk.jpa.demo.entity.Sex;
 import com.qbk.jpa.demo.entity.User;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.*;
@@ -13,7 +12,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringDataJpaDemoTest {
 
