@@ -18,7 +18,7 @@
     <description>es</description>
 
     <properties>
-        <elasticsearch.version>6.3.2</elasticsearch.version>
+        <elasticsearch.version>6.8.23</elasticsearch.version>
     </properties>
 
     <dependencies>
