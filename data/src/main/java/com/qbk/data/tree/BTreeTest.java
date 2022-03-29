@@ -13,6 +13,8 @@ import java.util.*;
  * 深度优先搜索的过程和递归调用在逻辑上是一致的。我们可以把函数的嵌套调用，看作访问下一个连通的结点；把函数的返回，看作没有更多新的结点需要访问，回溯到上一个结点。
  *
  * 广度优先
+ * 英文缩写为BFS，其英文全称是Breadth First Search。所有因为展开节点而得到的子节点都会被加进一个先进先出的队列中。
+ * 广度优先搜索算法是先访问图中的一个节点，然后再访问所有和它相邻的符合条件的节点依次往后直到访问完图中所有的节点。
  *
  * List深拷贝
  *
@@ -134,7 +136,9 @@ public class BTreeTest {
         //深度优先（递归）
         depthFirst(node);
 
-        //TODO 广度优先
+        //广度优先
+        System.out.println("-----------------广度优先：");
+        broadFirstSearch(node);
 
     }
     /**
@@ -178,12 +182,12 @@ public class BTreeTest {
      * 英文缩写为DFS即Depth First Search.其过程简要来说是对每一个可能的分支路径深入到不能再深入为止，而且每个节点只能访问一次。
      * 深度优先遍历各个节点，需要使用到栈（Stack）这种数据结构。Stack的特点是是先进后出。
      */
-    static void depthFirstSearch(Node node){
+    static void depthFirstSearch(Node nodeHead){
         Stack<Node> nodeStack = new Stack<>();
-        nodeStack.add(node);
+        nodeStack.add(nodeHead);
         while (!nodeStack.isEmpty()){
             //移除栈顶部的对象
-            node = nodeStack.pop();
+            Node node = nodeStack.pop();
             System.out.println(node.getId());
             //子节点
             List<Node> children = node.getChildren();
@@ -216,6 +220,24 @@ public class BTreeTest {
             e.printStackTrace();
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * 广度优先遍历是使用队列实现
+     * BFS，其英文全称是Breadth First Search。所有因为展开节点而得到的子节点都会被加进一个先进先出的队列中。
+     */
+    static void broadFirstSearch(Node nodeHead) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(nodeHead);
+        while(!queue.isEmpty()) {
+            //检索并移除此队列的头部
+            Node node = queue.poll();
+            System.out.println(node.getId());
+            List<Node> children = node.getChildren();
+            if(!CollectionUtils.isEmpty(children)){
+                queue.addAll(children);
+            }
+        }
     }
 }
 @Data
