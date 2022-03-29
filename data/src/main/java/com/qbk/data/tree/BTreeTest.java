@@ -10,6 +10,7 @@ import java.util.*;
 /**
  * 深度优先
  * 英文缩写为DFS即Depth First Search.其过程简要来说是对每一个可能的分支路径深入到不能再深入为止，而且每个节点只能访问一次。
+ * 深度优先搜索的过程和递归调用在逻辑上是一致的。我们可以把函数的嵌套调用，看作访问下一个连通的结点；把函数的返回，看作没有更多新的结点需要访问，回溯到上一个结点。
  *
  * 广度优先
  *
@@ -192,6 +193,7 @@ public class BTreeTest {
                  //翻转子节点 ,需要倒着插入子节点
                  newList.sort((node1 ,node2) -> node2.getId() - node1.getId());
                 for (Node child : newList) {
+                     //入栈
                      nodeStack.push(child);
                 }
             }
