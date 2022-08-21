@@ -66,6 +66,7 @@
 <!--		<module>javademo</module>-->
 		<module>nosql</module>
 		<module>model</module>
+		<module>zk</module>
 	</modules>
 
 	<properties>
