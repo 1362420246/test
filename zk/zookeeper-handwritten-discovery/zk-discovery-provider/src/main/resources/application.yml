@@ -1,0 +1,6 @@
+server.port: 9092
+
+zk:
+ service-name: discovery-provider
+ server: 101.43.76.164:2181
+ ip: 127.0.0.1
