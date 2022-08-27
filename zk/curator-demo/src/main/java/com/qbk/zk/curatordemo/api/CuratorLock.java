@@ -14,7 +14,7 @@ public class CuratorLock {
         String url = "101.43.76.164:2181";
         //认证
         String scheme = "digest";
-        byte[] auth = "root:123456".getBytes();
+        byte[] auth = "qbk:123456".getBytes();
         //Curator
         CuratorFramework zkClient = CuratorFrameworkFactory
                 .builder()
