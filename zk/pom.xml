@@ -21,6 +21,7 @@
     <modules>
         <module>zookeeper-client-demo</module>
         <module>curator-demo</module>
+        <module>zookeeper-handwritten-config</module>
         <module>zookeeper-handwritten-discovery</module>
     </modules>
 

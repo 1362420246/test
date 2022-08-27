@@ -1,0 +1,2 @@
+org.springframework.context.ApplicationContextInitializer=\
+com.qbk.zk.handwritten.config.initializer.ZkConfigApplicationContextInitializer
