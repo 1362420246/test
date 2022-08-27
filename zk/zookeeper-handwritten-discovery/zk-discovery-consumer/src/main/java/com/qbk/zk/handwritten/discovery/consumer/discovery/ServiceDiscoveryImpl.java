@@ -18,7 +18,7 @@ public class ServiceDiscoveryImpl implements ServiceDiscovery {
     private final CuratorFramework curatorFramework;
     private final String basePath = "/qbk-registry";
     private final String scheme = "digest";
-    private final byte[] auth = "root:123456".getBytes();
+    private final byte[] auth = "qbk:123456".getBytes();
 
     /**
      * 构造器中建立 zk链接
