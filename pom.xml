@@ -67,6 +67,7 @@
 		<module>nosql</module>
 		<module>model</module>
 		<module>zk</module>
+		<module>netty</module>
 	</modules>
 
 	<properties>
