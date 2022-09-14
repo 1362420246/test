@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  */
 public class MutilDispatchHandler  implements Runnable{
 
-    private Executor executor = Executors.newFixedThreadPool(10);
+    private static Executor executor = Executors.newFixedThreadPool(10);
 
     SocketChannel socketChannel;
 
@@ -28,7 +28,7 @@ public class MutilDispatchHandler  implements Runnable{
     /**
      * 执行的任务就是之前handler要做的事情，定义一个静态的内部类ReaderHandler，实现Runnable接口
      */
-    static class ReaderHandler implements  Runnable{
+    static class ReaderHandler implements Runnable{
         SocketChannel socketChannel;
 
         public ReaderHandler(SocketChannel socketChannel){
@@ -37,9 +37,6 @@ public class MutilDispatchHandler  implements Runnable{
 
         @Override
         public void run() {
-            if(!socketChannel.isOpen()){
-                return;
-            }
             ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
             int length;
             StringBuilder message = new StringBuilder();
@@ -48,11 +45,7 @@ public class MutilDispatchHandler  implements Runnable{
                     length = socketChannel.read(byteBuffer);
                     message.append(new String(byteBuffer.array()),0,byteBuffer.position());
                 }while (length > byteBuffer.capacity());
-                if(length == -1){
-                    socketChannel.close();
-                }else {
-                    System.out.println(message);
-                }
+                System.out.println("【" + Thread.currentThread().getName() + "】收到一个消息：" +message);
             } catch (IOException e) {
                 e.printStackTrace();
             }finally {

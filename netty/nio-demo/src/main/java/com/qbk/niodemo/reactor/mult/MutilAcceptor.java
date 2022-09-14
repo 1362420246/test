@@ -21,7 +21,7 @@ public class MutilAcceptor implements Runnable{
     public void run() {
         try {
             SocketChannel socketChannel = serverSocketChannel.accept();
-            System.out.println("收到一个链接：" + socketChannel.getRemoteAddress());
+            System.out.println("【" + Thread.currentThread().getName() + "】收到一个链接：" + socketChannel.getRemoteAddress());
             socketChannel.configureBlocking(false);
             socketChannel.register(selector,SelectionKey.OP_READ,new MutilDispatchHandler(socketChannel));
         } catch (IOException e) {

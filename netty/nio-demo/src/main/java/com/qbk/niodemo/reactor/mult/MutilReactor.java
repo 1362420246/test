@@ -24,6 +24,7 @@ public class MutilReactor implements Runnable {
     public void run() {
         while (!Thread.interrupted()){
             try {
+                Thread.sleep(10);
                 int select = selector.select();
                 if(select > 0){
                     Set<SelectionKey> selectionKeys = selector.selectedKeys();
@@ -33,7 +34,7 @@ public class MutilReactor implements Runnable {
                         iterable.remove();
                     }
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         }
