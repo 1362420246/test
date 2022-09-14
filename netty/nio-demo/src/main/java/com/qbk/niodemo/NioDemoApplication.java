@@ -7,8 +7,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * aio
  * bio
  * nio
- * Reactor
  * Proactor
+ * Reactor
  */
 @SpringBootApplication
 public class NioDemoApplication {
