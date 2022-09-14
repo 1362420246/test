@@ -28,6 +28,7 @@ public class MainReactor implements Runnable {
         serverSocketChannel.register(
                 selector,
                 SelectionKey.OP_ACCEPT,
+                //初始化Acceptor中创建子Reactor
                 new MainAcceptor(serverSocketChannel)
         );
     }
@@ -50,6 +51,7 @@ public class MainReactor implements Runnable {
     }
 
     private void dispatch(SelectionKey key) {
+        //主Reactor 把事件分发给 Acceptor
         MainAcceptor acceptor = (MainAcceptor) key.attachment();
         if (acceptor != null) {
             acceptor.accept();

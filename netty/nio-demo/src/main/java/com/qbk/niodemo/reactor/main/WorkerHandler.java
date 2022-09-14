@@ -26,7 +26,7 @@ public class WorkerHandler{
             socketChannel.read(byteBuffer);
             String message = new String(byteBuffer.array(), StandardCharsets.UTF_8);
             System.out.println("【" + Thread.currentThread().getName() + "】收到一个消息：" +message);
-            socketChannel.write(ByteBuffer.wrap("消息收到了".getBytes(StandardCharsets.UTF_8)));
+            socketChannel.write(ByteBuffer.wrap("\r\nserver received!\r\n".getBytes()));
         }catch (IOException e){
             System.out.println("退出");
             try {
