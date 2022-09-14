@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-
+/**
+ * 多Reactor模型 (也是主从Reactor模型)
+ *
+ * 客户端测试： telnet 127.0.0.1 8080
+ */
 public class MultiplyReactor {
 
     Executor mainReactorExecutor= Executors.newFixedThreadPool(10);

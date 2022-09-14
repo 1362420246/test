@@ -49,7 +49,7 @@ public class Acceptor implements Runnable{
             SocketChannel socketChannel = serverSocketChannel.accept();
             if(socketChannel != null){
                 socketChannel.write(ByteBuffer.wrap("Multiply Reactor Patterm\r\nreactor> ".getBytes()));
-                System.out.println(Thread.currentThread().getName()+": Main-Reactor-Acceptor:"+socketChannel.getLocalAddress()+"连接");
+                System.out.println(Thread.currentThread().getName()+": Main-Reactor-Acceptor:"+socketChannel.getRemoteAddress()+"连接");
                 Reactor subReactor = subReactors[handerNext];
                 subReactor.register(new AsyncHandler(socketChannel));
                 if( ++handerNext == subReactors.length){
